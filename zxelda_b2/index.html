@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>ZXelda Beta 2 - UOC TFG Videojuegos</title>
+    <title>ZXelda Beta 1 - UOC TFG Videojuegos</title>
     <script src="jsspeccy/jsspeccy.js"></script>
 
     <style>
@@ -16,29 +16,27 @@
             font-family: sans-serif;
         }
         #jsspeccy {
-            /* El tamaño lo suele manejar el emulador con el zoom, 
-               pero le damos un contenedor base */
             border: 10px solid #222;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
     </style>
 </head>
 <body>
-
     <div id="jsspeccy"></div>
 
     <script>
-        // Esperamos a que la página cargue para inicializar
         window.addEventListener('load', function() {
-            // JSSpeccy suele recibir (elemento_dom, opciones)
             const emu = JSSpeccy(document.getElementById('jsspeccy'), {
                 autostart: true,
-                loadURL: 'zxelda_b2.tap', // Asegúrate de que el archivo esté en la misma carpeta
+                loadURL: 'zxelda_b1.tap',
                 machine: 48,
                 zoom: 2,
                 sandbox: false
             });
         });
     </script>
+que hay implementado:
+abc
+cdee
 </body>
 </html>
