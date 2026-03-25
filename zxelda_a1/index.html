@@ -19,6 +19,11 @@
             border: 10px solid #222;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
+        #changelog {
+            font-size: 9em;
+	argin-top:50rem;
+
+        }
     </style>
 </head>
 <body>
@@ -28,22 +33,32 @@
         window.addEventListener('load', function() {
             const emu = JSSpeccy(document.getElementById('jsspeccy'), {
                 autostart: true,
-                loadURL: 'zxelda_a1.tap',
+                autoload: true,
+                loadURL: 'zxelda_a1.z80',
                 machine: 48,
                 zoom: 2,
                 sandbox: false
             });
         });
     </script>
+
+    <div id="changelog">
+<h2
 changelog:
+</h2>
+<p>
 - se ha utilizado como base los archivos del tutorial para zx spectrum de radastan (21 Mar' 2014)
 https://foro.speccy.org/viewtopic.php?t=3836
-
-- se ha implementado el codigo de pruebas de hark0 para su demostracion de sprites en movimiento y cambios entre pantallas en este video (no existe ninguna otra documentacion)
+<p>
+</p>
+- se ha implementado el codigo de pruebas de hark0 para su demostracion de sprites en movimiento y cambios entre pantallas en este video (no existe ninguna otra documentacion) (30 Abr' 2014)
 https://www.youtube.com/watch?v=eY-euIVbvmc
-
+<p>
+</p>
 una vez resuelto el problema de obtener un motor basico (muy basico) para la maquina, y resolver uno de los problemas principales de gameplay que es el cambio entre pantallas, se ha considerado la version alpha como finalizada, comenzando con la ampliacion del motor a las mecanicas del juego y la creacion del juego en si, se puede ver la siguiente version BETA 1 en:
-
 https://rnd-usr.com/zxelda_b1
+</p>
+</div>
+
 </body>
 </html>
