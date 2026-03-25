@@ -148,29 +148,30 @@
 
         const createScene = function () {
             const scene = new BABYLON.Scene(engine);
-            scene.clearColor = new BABYLON.Color3(0, 0, 0); 
+            scene.clearColor = new BABYLON.Color3(0, 0, 0);
 
-            const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2, 100, new BABYLON.Vector3(0, 0, 0), scene); // set the camera
-            camera.lowerBetaLimit = 1; // vertical
-            camera.upperBetaLimit = Math.PI / 1.5; 
-            camera.lowerAlphaLimit = -Math.PI / 1.1; // horizonal
-            camera.upperAlphaLimit = (Math.PI / 2) - 1.9;
-            camera.lowerRadiusLimit = 10; // zoom
-            camera.upperRadiusLimit = 150;
+            const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2, 115, new BABYLON.Vector3(0, 0, 0), scene); // set the camera
+            camera.lowerBetaLimit = 0.2; // vertical apperture top
+            camera.upperBetaLimit = Math.PI / 1.1; // vertical apperture bot
+            camera.lowerAlphaLimit = -Math.PI / 1.01; // horizonal apperture left
+            camera.upperAlphaLimit = (Math.PI / 2) - 1.6; // horizonal apperture right
+            camera.lowerRadiusLimit = 10; // zoom apperture
+            camera.upperRadiusLimit = 300;
             camera.attachControl(canvas, true);
 
-            const gl = new BABYLON.GlowLayer("glow", scene); // setup glow layer
+            const gl = new BABYLON.GlowLayer("glow", scene, {
+            blurKernelSize: 32});
             gl.intensity = 2;
 
-            const matOn = new BABYLON.StandardMaterial("matOn", scene); // setup off materia
-            matOn.diffuseColor = new BABYLON.Color3(0, 0, 0);
-            matOn.emissiveColor = new BABYLON.Color3(0.3, 0.6, 1);
-
-            const matOff = new BABYLON.StandardMaterial("matOff", scene); // setup on material
+            const matOff = new BABYLON.StandardMaterial("matOff", scene);
             matOff.diffuseColor = new BABYLON.Color3(0, 0, 0);
             matOff.emissiveColor = new BABYLON.Color3(0, 0, 0);
 
-            var meshesMap = {};
+            const matOn = new BABYLON.StandardMaterial("matOn", scene);
+            matOn.diffuseColor = new BABYLON.Color3(0, 0, 0);
+            matOn.emissiveColor = new BABYLON.Color3(0.3, 0.6, 1);
+
+            var meshesMap = {}; //here they are
 
             BABYLON.SceneLoader.ImportMesh("", "./", "westinghouse.obj", scene, function (meshes) {
                 meshes.forEach(function(mesh) {
@@ -179,48 +180,38 @@
                 });
             });
 
-            // --- LOGICA DEL REPRODUCTOR ---
-            var nonStandardDuration = 0;
+            //ANIM
+            var duration = 500;
+            var deltaTime = 0;
             var currentIndex = 0;
-            var deltaTime = 0; // deltaTime está en milisegundos
 
-            scene.registerBeforeRender(function () {
-                deltaTime += engine.getDeltaTime();
+            scene.registerBeforeRender(function () {//scene setup
+                deltaTime += engine.getDeltaTime(); //actual time elapsed
+                var currentStep = lightShow[currentIndex]; //actual keyframe
 
-                var currentStep = lightShow[currentIndex]; // actual keyframe
-
-                if (currentStep.duration !== undefined) { // override default blinking duration (1/2s)
-                    nonStandardDuration = currentStep.duration;
+                if (currentStep.duration !== undefined) { //override default blinking duration (500ms)
+                    duration = currentStep.duration;
                 } else {
-                    nonStandardDuration = 0;
+                    duration = 500;
                 }
 
-                if (deltaTime > 500 && deltaTime > nonStandardDuration) { // the blinking time is always 1/2s. excepts when it's defined by the keyframe
-                    deltaTime = 0; // default blinking time counter
-                   
-                    currentIndex++; // Next keyframe, rolls
+                if (deltaTime > duration) { //redraw
+                    deltaTime = 0; //resets time counter
+                    currentIndex++; //next keyframe, rolls the list
                     if (currentIndex >= lightShow.length) {
                         currentIndex = 0;
                     }
 
-                    var currentKeyframe = lightShow[currentIndex].keyframe; // loads the current keyframe
-                    
-                    Object.values(meshesMap).forEach(mesh => {mesh.material = matOff}); // Scene objects all off after every keyframe, or previous keyframe will be kept on
+                    Object.values(meshesMap).forEach(mesh => {mesh.material = matOff}); //turns off everything before redraw
 
-                    switch (currentKeyframe[0]) {
-                        case "ALL":
-                            currentKeyframe.forEach(element => {
-                                if(meshesMap[element]) meshesMap[element].material = matOn;
-                            });
-                            break;
-                        default:
-                            currentKeyframe.forEach(element => {
-                                if (meshesMap[element]) meshesMap[element].material = matOn;
-                            });
-                    }
+                    lightShow[currentIndex].keyframe.forEach(element => {
+                        if (meshesMap[element]) { //if in keyframe list
+                            meshesMap[element].material = matOn; //lit
+                        }
+                    });
                 }
             });
-            return scene;
+            return scene; //return what to render
         };
 
         const scene = createScene();

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ZXelda Beta 2 - UOC TFG Videojuegos</title>
+        <script src="jsspeccy/jsspeccy.js"></script>
+
+	<script>
+	// Inicialización automática
+	JSSpeccy.init({
+		container: 'jsspeccy',
+	        autostart: true,
+	        loadURL: 'zxelda_b2.tap',
+	        machine: 48,
+	        scale: 2
+	});
+	</script>
+
+        <style>
+            body {
+                background-color: #444;
+            }
+            #jsspeccy {
+                width: 640px;
+                margin: auto;
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body onload="emu = JSSpeccy(document.getElementById('jsspeccy'), {zoom: 2, sandbox: false})">
+        <div id="jsspeccy"></div>
+    </body>
+</html>
