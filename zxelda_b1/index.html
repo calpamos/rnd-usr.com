@@ -3,14 +3,14 @@
 <head>
     <title>ZXelda Beta 1 - UOC TFG Videojuegos</title>
     <script src="jsspeccy/jsspeccy.js"></script>
-
     <style>
         body {
             background-color: #444;
             display: flex;
+            flex-direction: column; /* Para que el texto de abajo no se monte */
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             color: white;
             font-family: sans-serif;
@@ -18,26 +18,45 @@
         #jsspeccy {
             border: 10px solid #222;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            background-color: #000; /* Fondo negro mientras carga */
         }
+        .info { margin-top: 20px; text-align: center; }
     </style>
 </head>
 <body>
+
     <div id="jsspeccy"></div>
+
+    <div class="info">
+        <h3>Implementado:</h3>
+        <p>abc<br>cdee</p>
+    </div>
 
     <script>
         window.addEventListener('load', function() {
-            const emu = JSSpeccy(document.getElementById('jsspeccy'), {
-                autostart: true,
-		autoLoad: true,
-		loadURL: 'zxelda_b1.z80',
-                machine: 48,
-                zoom: 2,
-                sandbox: false
-            });
+            // Intentamos la inicialización directa
+            // Importante: Asegúrate de que 'zxelda_b1.z80' esté en la misma carpeta que este HTML
+            try {
+                const container = document.getElementById('jsspeccy');
+                const options = {
+                    autostart: true,
+                    snapshot: 'zxelda_b1.z80', // Algunas versiones usan 'snapshot' en vez de 'loadURL'
+                    loadURL: 'zxelda_b1.z80',   // Mantenemos ambos por si acaso
+                    machine: 48,
+                    zoom: 2
+                };
+
+                // Invocación estándar de JSSpeccy
+                var emu = JSSpeccy(container, options);
+                
+                // Forzar el arranque si el objeto emu lo permite
+                if (emu && emu.run) {
+                    emu.run();
+                }
+            } catch (e) {
+                console.error("Error al cargar JSSpeccy:", e);
+            }
         });
     </script>
-que hay implementado:
-abc
-cdee
 </body>
 </html>
