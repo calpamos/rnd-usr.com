@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <title>ZXelda Beta 1 - UOC TFG Videojuegos</title>
+    <script src="jsspeccy/jsspeccy.js"></script>
+
+    <style>
+        body {
+            background-color: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            font-family: sans-serif;
+        }
+        #jsspeccy {
+            border: 10px solid #222;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="jsspeccy"></div>
+
+    <script>
+        window.addEventListener('load', function() {
+            const emu = JSSpeccy(document.getElementById('jsspeccy'), {
+                autostart: true,
+                loadURL: 'zxelda_a1.tap',
+                machine: 48,
+                zoom: 2,
+                sandbox: false
+            });
+        });
+    </script>
+que hay implementado:
+abc
+cdee
+</body>
+</html>
