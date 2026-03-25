@@ -28,12 +28,12 @@
         window.addEventListener('load', function() {
             const emu = JSSpeccy(document.getElementById('jsspeccy'), {
                 autostart: true,
+		autoLoad: true,
                 loadURL: 'zxelda_b1.tap',
 		//loadURL: 'zxelda_b1.z80',
                 machine: 48,
                 zoom: 2,
                 sandbox: false
-		autoLoad: true
             });
         });
     </script>
