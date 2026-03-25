@@ -15,6 +15,12 @@
             color: white;
             font-family: sans-serif;
         }
+	a {
+            color: teal;
+	}
+	a:visited {
+            color: teal;
+	}
         #jsspeccy {
             border: 10px solid #222;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -26,21 +32,29 @@
 <body>
     <div id="jsspeccy"></div>
     <div class="info">
-        <h3>Beta 1:</h3>
+        <h3>ZXelda - Beta v.1<br>UOC TFG Videojuegos</h3>
+
+	<p>controles: Q: Arriba // A: Abajo // O: Izquierda // P: Derecha<br>
+	hacer click sobre la ventana para habilitar los controles</p>
+
 <p>
 - Se ha implementado una funcionalidad basica para poder desplazarse entre los mapas en las 4 direcciones
-<br>
-- Se han creado un subconjunto de sprites razonable para alcanzar la funcionalidad basica
-<br>
-- Se han recreado 3 mapas, dos de superficie y una mazmorra
-<br>
-- El primer mapa es la pantalla de inicio, el segundo esta a la derecha del inicio, el tercero esta encima del segundo
-<br>
-- se ha posicionado la pantalla de juego en el centro y abajo de la pantalla, dejando sitio para el status en la parte de arriba
-<br>
-<a href="https://rnd-usr.com/zxelda_a"><< alpha</a> | 
 </p>
-    </div>
+<p>
+- Se han creado un subconjunto de sprites razonable para demostrar la conversion "hacia abajo" del aspecto grafico
+</p>
+- Se han recreado 3 mapas, dos de superficie y una mazmorra
+<p>
+- El primer mapa es la pantalla de inicio, el segundo esta a la derecha del inicio, el tercero esta encima del segundo
+</p>
+<p>
+- se ha posicionado la pantalla de juego en el centro y abajo de la pantalla, dejando sitio para el status en la parte de arriba
+</p>
+
+<p>
+<a href="https://rnd-usr.com/zxelda_a1"><< alpha v.1</a> | <a href="https://rnd-usr.com">index</a> | <a href="https://rnd-usr.com/zxelda_b1">>> beta v.1</a>
+</p>
+
     <script>
         let emu = JSSpeccy(document.getElementById('jsspeccy'), {
             autoStart: true,
